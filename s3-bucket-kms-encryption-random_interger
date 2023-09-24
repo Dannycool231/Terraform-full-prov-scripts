@@ -1,3 +1,7 @@
+provider "aws" {
+  region  = "us-west-2"
+  profile = "default"
+}
 #s3 bucket for terraform backend
 resource "aws_s3_bucket" "backend" {
   bucket = "bootcampgroup17-${var.env}-${random_integer.backend.result}"
@@ -33,4 +37,8 @@ resource "random_integer" "backend" {
     # Generate a new integer each time we switch to a new listener ARN
     Environment = var.env
   }
+}
+variable "env" {
+  type    = string
+  default = "dev"
 }
